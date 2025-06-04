@@ -9,7 +9,8 @@ PASSABLE = 50
 
 def main():
     score = get_score()
-
+    grade = get_grade(score)
+    print(grade)
 
 
 def get_score():
@@ -20,10 +21,13 @@ def get_score():
         score = float(input("Enter score: "))
     return score
 
-else:
-    if score > 90:
-        print("Excellent")
-    elif score > 50:
-        print("Passable")
+def get_grade(score):
+    """Determine grade from the score"""
+    if score > EXCELLENT:
+        return "Excellent"
+    elif score > PASSABLE:
+        return "Passable"
     else:
-        print("Bad")
+        return "Bad"
+
+main()
