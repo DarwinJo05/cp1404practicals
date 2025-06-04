@@ -15,7 +15,15 @@ def main():
             score = validate_score(score)
             grade = get_grade(score)
             print(grade)
-
+        elif choice == "S":
+            score = validate_score(score)
+            stars = display_stars(score)
+            print (stars)
+        else:
+            print("Invalid Choice")
+        print(MENU)
+        choice = input("Enter choice: ").upper()
+    print("Farewell")
 
 def get_score():
     """Get and validate score"""
@@ -39,5 +47,9 @@ def get_grade(score):
         return "Passable"
     else:
         return "Bad"
+
+def display_stars(score):
+    """Print stars"""
+    return int(score) * "*"
 
 main()
