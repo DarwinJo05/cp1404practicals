@@ -13,11 +13,14 @@ def main():
 
 def load_data():
     """Read data from file formatted like: subject,lecturer,number of students."""
+    subject_data = []
     input_file = open(FILENAME)
     for line in input_file:
-        parts = line.split(',')  # Separate the data into its parts
-        parts[2] = int(parts[2])  # Make the number an integer (ignore PyCharm's warning)
+        parts = line.split(',')
+        parts[2] = int(parts[2])
+        subject_data.append(parts)
     input_file.close()
+    return subject_data
 
 
 main()
