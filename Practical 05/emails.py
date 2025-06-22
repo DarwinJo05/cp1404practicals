@@ -16,6 +16,10 @@ def main():
         email_to_name[email] = name
         email = input("Email: ")
 
+    for email, name in email_to_name.items():
+        print(f"{name} ({email})")
+
+
 def extract_name(email):
     """Extract a name from the email"""
     username = email.split("@")[0]
