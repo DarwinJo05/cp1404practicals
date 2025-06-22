@@ -10,6 +10,12 @@ def main():
     champion_to_count = count_champions(data)
     countries = get_champion_countries(data)
 
+    print("Wimbledon Champions:")
+    for champion, count in champion_to_count.items():
+        print(f"{champion} {count}")
+
+    print(f"These {len(countries)} countries have won Wimbledon:")
+    print(", ".join(sorted(countries)))
 
 def read_wimbledon_data(FILENAME):
     """Read file insert into list"""
