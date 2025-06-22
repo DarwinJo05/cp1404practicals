@@ -1,7 +1,7 @@
 """
 wimbledon
-Estimated: 1 hours
-Actual:
+Estimated: 1 hour
+Actual: 2 hours
 """
 FILENAME = "wimbledon.csv"
 
