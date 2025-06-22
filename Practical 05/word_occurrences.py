@@ -13,3 +13,5 @@ for word in words:
     else:
         word_to_count[word] = 1
 
+for word in word_to_count:
+    print(word, ":", word_to_count[word])
