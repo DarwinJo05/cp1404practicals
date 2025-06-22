@@ -10,6 +10,11 @@ def main():
     email = input("Email: ")
     while email != "":
         name = extract_name(email)
+        confirm = input(f"Is your name {name}? (y/n) ").strip().lower()
+        if confirm not in ("", "y", "yes"):
+            name = input("Name: ")
+        email_to_name[email] = name
+        email = input("Email: ")
 
 def extract_name(email):
     """Extract a name from the email"""
