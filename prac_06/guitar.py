@@ -1,4 +1,4 @@
-CURRENT_YEAR = 2025
+CURRENT_YEAR = 2022
 
 class Guitar:
     """Class of Guitar"""
