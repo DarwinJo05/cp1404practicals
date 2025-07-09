@@ -1,3 +1,5 @@
+CURRENT_YEAR = 2025
+
 class Guitar:
     """Class of Guitar"""
 
@@ -11,6 +13,10 @@ class Guitar:
         """Return a string in the format"""
         return f"{self.name} ({self.year}) : ${self.cost:,.2f}"
 
-    def get_age(self, CURRENT_YEAR):
+    def get_age(self):
         """Return the age of the guitar in years."""
         return CURRENT_YEAR - self.year
+
+    def is_vintage(self):
+        """Return True if the guitar is 50 or more years old"""
+        return self.get_age() >= 50
