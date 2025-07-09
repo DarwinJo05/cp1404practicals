@@ -10,3 +10,7 @@ class Guitar:
     def __str__(self):
         """Return a string in the format"""
         return f"{self.name} ({self.year}) : ${self.cost:,.2f}"
+
+    def get_age(self, CURRENT_YEAR):
+        """Return the age of the guitar in years."""
+        return CURRENT_YEAR - self.year
