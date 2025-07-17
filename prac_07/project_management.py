@@ -3,11 +3,23 @@ from project import Project
 FILENAME = "projects.txt"
 
 def main():
-    """Load projects from file and display them."""
+    """Display menu and manage project options."""
     projects = load_projects(FILENAME)
-    print("Projects loaded from file:")
-    for project in projects:
-        print(project)
+    print("Projects loaded from file.")
+
+    MENU = "\n(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by date\n(A)dd new project\n(U)pdate project\n(Q)uit"
+    print(MENU)
+    choice = input(">>> ").upper()
+
+    while choice != "Q":
+        if choice == "D":
+            display_projects(projects)
+        else:
+            print("Invalid choice")
+        print(MENU)
+        choice = input(">>> ").upper()
+
+    print("Goodbye")
 
 def load_projects(filename):
     """Read projects and return a list of Project objects."""
@@ -24,6 +36,11 @@ def load_projects(filename):
             project = Project(name, start_date, priority, cost_estimate, completion_percent)
             projects.append(project)
     return projects
+
+def display_projects(projects):
+    """Display all loaded projects."""
+    for project in projects:
+        print(project)
 
 if __name__ == "__main__":
     main()
