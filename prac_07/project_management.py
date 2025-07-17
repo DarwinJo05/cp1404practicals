@@ -4,6 +4,7 @@ from project import Project
 FILENAME = "projects.txt"
 MENU = "\n(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by date\n(A)dd new project\n(U)pdate project\n(Q)uit"
 
+
 def main():
     """Display menu and manage project options."""
     projects = load_projects(FILENAME)
@@ -38,6 +39,7 @@ def main():
 
     print("Goodbye")
 
+
 def load_projects(filename):
     """Read projects and return a list of Project objects."""
     projects = []
@@ -54,6 +56,7 @@ def load_projects(filename):
             projects.append(project)
     return projects
 
+
 def display_projects(projects):
     """Display all loaded projects."""
     incomplete = [p for p in projects if p.completion_percent < 100]
@@ -68,6 +71,7 @@ def display_projects(projects):
     complete_sorted = sort_projects_by_priority(complete)
     for project in complete_sorted:
         print(f"  {project}")
+
 
 def filter_projects_by_date(projects):
     """Filter and display projects that start after a given date."""
@@ -88,6 +92,7 @@ def filter_projects_by_date(projects):
     for project in filtered_sorted:
         print(project)
 
+
 def add_new_project(projects):
     """Add a new project to the list."""
     print("Let's add a new project")
@@ -100,6 +105,7 @@ def add_new_project(projects):
     project = Project(name, start_date, priority, cost_estimate, completion_percent)
     projects.append(project)
     print(f"Project '{name}' added.")
+
 
 def update_project(projects):
     """Update an existing project's completion percentage and/or priority."""
@@ -121,27 +127,34 @@ def update_project(projects):
     if new_priority:
         project.priority = int(new_priority)
 
+
 def sort_projects_by_priority(projects):
     """Return a list of projects sorted by priority."""
     return sorted(projects, key=get_priority)
+
 
 def sort_projects_by_start_date(projects):
     """Return a list of projects sorted by start date."""
     return sorted(projects, key=get_start_date)
 
+
 def get_priority(project):
     return project.priority
 
+
 def get_start_date(project):
     return datetime.strptime(project.start_date, "%d/%m/%Y")
+
 
 def save_projects(filename, projects):
     """Save list of projects to the given filename."""
     with open(filename, 'w') as out_file:
         out_file.write("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percent\n")
         for project in projects:
-            out_file.write(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percent}\n")
+            out_file.write(
+                f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percent}\n")
     print(f"Projects saved to {filename}")
+
 
 if __name__ == "__main__":
     main()
