@@ -13,6 +13,15 @@ def main():
     choice = input(">>> ").upper()
 
     while choice != "Q":
+        if choice == "L":
+            filename = input("Filename to load projects from: ")
+            projects = load_projects(filename)
+            print(f"Projects loaded from {filename}")
+
+        elif choice == "S":
+            filename = input("Filename to save projects to: ")
+            save_projects(filename, projects)
+
         if choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -21,6 +30,7 @@ def main():
             add_new_project(projects)
         elif choice == "U":
             update_project(projects)
+
         else:
             print("Invalid choice")
         print(MENU)
@@ -124,6 +134,14 @@ def get_priority(project):
 
 def get_start_date(project):
     return datetime.strptime(project.start_date, "%d/%m/%Y")
+
+def save_projects(filename, projects):
+    """Save list of projects to the given filename."""
+    with open(filename, 'w') as out_file:
+        out_file.write("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percent\n")
+        for project in projects:
+            out_file.write(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percent}\n")
+    print(f"Projects saved to {filename}")
 
 if __name__ == "__main__":
     main()
