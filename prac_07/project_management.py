@@ -1,3 +1,4 @@
+from datetime import datetime
 from project import Project
 
 FILENAME = "projects.txt"
@@ -14,6 +15,8 @@ def main():
     while choice != "Q":
         if choice == "D":
             display_projects(projects)
+        elif choice == "F":
+            filter_projects_by_date(projects)
         else:
             print("Invalid choice")
         print(MENU)
@@ -40,6 +43,19 @@ def load_projects(filename):
 def display_projects(projects):
     """Display all loaded projects."""
     for project in projects:
+        print(project)
+
+def filter_projects_by_date(projects):
+    """Filter and display projects that start after a given date."""
+    date_input = input("Show projects that start after date (dd/mm/yyyy): ")
+    try:
+        filter_date = datetime.strptime(date_input, "%d/%m/%Y").date()
+    except ValueError:
+        print("Invalid date format")
+        return
+
+    filtered_projects = [p for p in projects if datetime.strptime(p.start_date, "%d/%m/%Y").date() > filter_date]
+    for project in sorted(filtered_projects, key=lambda p: p.start_date):
         print(project)
 
 if __name__ == "__main__":
