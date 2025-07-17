@@ -2,13 +2,13 @@ from datetime import datetime
 from project import Project
 
 FILENAME = "projects.txt"
+MENU = "\n(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by date\n(A)dd new project\n(U)pdate project\n(Q)uit"
 
 def main():
     """Display menu and manage project options."""
     projects = load_projects(FILENAME)
     print("Projects loaded from file.")
 
-    MENU = "\n(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by date\n(A)dd new project\n(U)pdate project\n(Q)uit"
     print(MENU)
     choice = input(">>> ").upper()
 
@@ -17,6 +17,10 @@ def main():
             display_projects(projects)
         elif choice == "F":
             filter_projects_by_date(projects)
+        elif choice == "A":
+            add_new_project(projects)
+        elif choice == "U":
+            update_project(projects)
         else:
             print("Invalid choice")
         print(MENU)
@@ -42,8 +46,18 @@ def load_projects(filename):
 
 def display_projects(projects):
     """Display all loaded projects."""
-    for project in projects:
-        print(project)
+    incomplete = [p for p in projects if p.completion_percent < 100]
+    complete = [p for p in projects if p.completion_percent == 100]
+
+    print("Incomplete projects:")
+    incomplete_sorted = sort_projects_by_priority(incomplete)
+    for project in incomplete_sorted:
+        print(f"  {project}")
+
+    print("Completed projects:")
+    complete_sorted = sort_projects_by_priority(complete)
+    for project in complete_sorted:
+        print(f"  {project}")
 
 def filter_projects_by_date(projects):
     """Filter and display projects that start after a given date."""
@@ -54,9 +68,62 @@ def filter_projects_by_date(projects):
         print("Invalid date format")
         return
 
-    filtered_projects = [p for p in projects if datetime.strptime(p.start_date, "%d/%m/%Y").date() > filter_date]
-    for project in sorted(filtered_projects, key=lambda p: p.start_date):
+    filtered_projects = []
+    for p in projects:
+        project_date = datetime.strptime(p.start_date, "%d/%m/%Y").date()
+        if project_date > filter_date:
+            filtered_projects.append(p)
+
+    filtered_sorted = sort_projects_by_start_date(filtered_projects)
+    for project in filtered_sorted:
         print(project)
+
+def add_new_project(projects):
+    """Add a new project to the list."""
+    print("Let's add a new project")
+    name = input("Name: ")
+    start_date = input("Start date (dd/mm/yyyy): ")
+    priority = int(input("Priority: "))
+    cost_estimate = float(input("Cost estimate: $"))
+    completion_percent = int(input("Percent complete: "))
+
+    project = Project(name, start_date, priority, cost_estimate, completion_percent)
+    projects.append(project)
+    print(f"Project '{name}' added.")
+
+def update_project(projects):
+    """Update an existing project's completion percentage and/or priority."""
+    for i, project in enumerate(projects):
+        print(f"{i} {project}")
+    try:
+        choice = int(input("Project choice: "))
+        project = projects[choice]
+    except (ValueError, IndexError):
+        print("Invalid project choice")
+        return
+
+    print(project)
+    new_percent = input("New Percentage: ")
+    if new_percent:
+        project.completion_percent = int(new_percent)
+
+    new_priority = input("New Priority: ")
+    if new_priority:
+        project.priority = int(new_priority)
+
+def sort_projects_by_priority(projects):
+    """Return a list of projects sorted by priority."""
+    return sorted(projects, key=get_priority)
+
+def sort_projects_by_start_date(projects):
+    """Return a list of projects sorted by start date."""
+    return sorted(projects, key=get_start_date)
+
+def get_priority(project):
+    return project.priority
+
+def get_start_date(project):
+    return datetime.strptime(project.start_date, "%d/%m/%Y")
 
 if __name__ == "__main__":
     main()
