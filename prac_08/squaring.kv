@@ -1,0 +1,27 @@
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    TextInput:
+        id: input_number
+        text: ''
+        hint_text: 'Enter a number'
+        font_size: 48
+        multiline: False
+        on_text_validate: app.handle_calculate(self.text)
+
+    Button:
+        text: 'Square'
+        font_size: 32
+        background_color: (0.2, 0.6, 1, 1)
+        color: (1, 1, 1, 1)
+        on_press: app.handle_calculate(input_number.text)
+
+    Label:
+        id: output_label
+        font_size: 48
+        color: (1, 0.4, 0.6, 1)
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
