@@ -4,13 +4,19 @@ from kivy.lang import Builder
 
 class BoxLayoutDemo(App):
     def build(self):
-        self.root = Builder.load_file("box_layout.kv")
+        self.title = "Box Layout Demo"
+        self.root = Builder.load_file('box_layout.kv')
         return self.root
 
     def handle_greet(self):
         name = self.root.ids.input_name.text
         self.root.ids.output_label.text = f"Hello {name}"
 
+    def handle_clear(self):
+        self.root.ids.input_name.text = ''
+        self.root.ids.output_label.text = ''
+
 
 if __name__ == '__main__':
     BoxLayoutDemo().run()
+
