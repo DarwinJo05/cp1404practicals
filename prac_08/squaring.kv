@@ -1,9 +1,9 @@
 BoxLayout:
     orientation: 'vertical'
-    padding: 10
     spacing: 10
+    padding: 10
 
-        TextInput:
+    TextInput:
         id: input_number
         text: ''
         hint_text: 'Enter a number'
@@ -11,21 +11,17 @@ BoxLayout:
         multiline: False
         on_text_validate: app.handle_calculate(self.text)
 
-    BoxLayout:
-        size_hint_y: None
-        height: self.minimum_height
-        spacing: 10
-
-        Button:
-            text: 'Square'
-            on_press: app.handle_calculate(input_number.text)
-
-        Button:
-            text: 'Clear'
-            on_press: app.handle_clear()
+    Button:
+        text: 'Square'
+        font_size: 32
+        background_color: (0.2, 0.6, 1, 1)
+        color: (1, 1, 1, 1)
+        on_press: app.handle_calculate(input_number.text)
 
     Label:
         id: output_label
-        text: ''
         font_size: 48
-        color: (0, 0.6, 1, 1)
+        color: (1, 0.4, 0.6, 1)
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size

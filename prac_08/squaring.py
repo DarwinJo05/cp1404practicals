@@ -22,15 +22,9 @@ class SquareNumberApp(App):
     def handle_calculate(self, value):
         """ handle calculation (could be button press or other call), output result to label widget """
         try:
-            result = float(value)
-            self.root.ids.output_label.text = str(result ** 2)
+            result = float(value) ** 2
+            self.root.ids.output_label.text = str(result)
         except ValueError:
-            self.root.ids.output_label.text = "Invalid input"
-
-    def handle_clear(self):
-        """ Clear the input and output fields """
-        self.root.ids.input_number.text = ''
-        self.root.ids.output_label.text = ''
-
+            return
 
 SquareNumberApp().run()
