@@ -3,12 +3,13 @@ BoxLayout:
     padding: 10
     spacing: 10
 
-    TextInput:
+        TextInput:
         id: input_number
         text: ''
         hint_text: 'Enter a number'
         font_size: 48
         multiline: False
+        on_text_validate: app.handle_calculate(self.text)
 
     BoxLayout:
         size_hint_y: None
