@@ -14,7 +14,7 @@ class SquareNumberApp(App):
     """ SquareNumberApp is a Kivy App for squaring a number """
     def build(self):
         """ build the Kivy app from the kv file """
-        Window.size = (200, 150)
+        Window.size = (300, 150)
         self.title = "Square Number"
         self.root = Builder.load_file('squaring.kv')
         return self.root
@@ -26,6 +26,11 @@ class SquareNumberApp(App):
             self.root.ids.output_label.text = str(result)
         except ValueError:
             self.root.ids.output_label.text = "Invalid input"
+
+    def handle_clear(self):
+        """Clear the input and output fields"""
+        self.root.ids.input_number.text = ''
+        self.root.ids.output_label.text = ''
 
 
 SquareNumberApp().run()
