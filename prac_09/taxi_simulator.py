@@ -13,5 +13,12 @@ def main():
 
     total_cost = 0
 
+    while True:
+        print("q)uit, c)hoose taxi, d)rive")
+        choice = input(">>> ").lower()
+
+        if choice == 'q':
+            break
+
 if __name__ == '__main__':
 main()
