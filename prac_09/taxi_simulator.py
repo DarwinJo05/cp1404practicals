@@ -20,5 +20,15 @@ def main():
         if choice == 'q':
             break
 
+        elif choice == 'c':
+            print("Taxis available:")
+            for i, taxi in enumerate(taxis):
+                print(f"{i} - {taxi}")
+            try:
+                taxi_choice = int(input("Choose taxi: "))
+                current_taxi = taxis[taxi_choice]
+            except (ValueError, IndexError):
+                print("Invalid taxi choice")
+
 if __name__ == '__main__':
 main()
