@@ -45,5 +45,15 @@ def main():
                 print(f"Your {current_taxi.name} trip cost you ${trip_cost:.2f}")
                 total_cost += trip_cost
 
+        else:
+            print("Invalid option")
+
+        print(f"Bill to date: ${total_cost:.2f}")
+
+    print(f"Total trip cost: ${total_cost:.2f}")
+    print("Taxis are now:")
+    for i, taxi in enumerate(taxis):
+        print(f"{i} - {taxi}")
+
 if __name__ == '__main__':
 main()
