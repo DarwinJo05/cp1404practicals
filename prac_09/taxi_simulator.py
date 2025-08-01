@@ -30,5 +30,20 @@ def main():
             except (ValueError, IndexError):
                 print("Invalid taxi choice")
 
+        elif choice == 'd':
+            if not current_taxi:
+                print("You need to choose a taxi before you can drive")
+            else:
+                try:
+                    distance = float(input("Drive how far? "))
+                except ValueError:
+                    print("Invalid distance")
+                    continue
+                current_taxi.start_fare()
+                current_taxi.drive(distance)
+                trip_cost = current_taxi.get_fare()
+                print(f"Your {current_taxi.name} trip cost you ${trip_cost:.2f}")
+                total_cost += trip_cost
+
 if __name__ == '__main__':
 main()
